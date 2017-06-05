@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1>{{ id }}</h1>
 
     
         <router-link to="/Hello2">跳到hello2</router-link>
@@ -21,6 +21,10 @@ export default {
       btnMsg:'确认'
     }
   },
+   created(){
+     this.id = this.$route.query.id;
+     console.log(this.id)
+        },
   methods : {
     plus: function () {
       alert(2)
