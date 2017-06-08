@@ -14,11 +14,13 @@
   <li v-for="item in newsList"  style="display:flex;padding:10px 10px;">
   <img :src="item.image_url" style="height:100%;width: 20%;"/>
   <div style="display: flex; flex-direction:column;justify-content: flex-start">
-  <router-link :to='{path: "/", query: {id: item.id}}'  >跳到{{item.title.substring(0,10)}}...</router-link>
+  <router-link :to='{path: "/", query: {id: item.id}}'  >{{item.title.substring(0,15)}}...</router-link>
   
   </div>
   </li>
+  
 </ul>
+<mt-button type="danger" @click='listplus'>加载更多</mt-button>
   </div>
 </template>
 
@@ -31,6 +33,7 @@ export default {
       msg: '黑额呵呵呵呵呵呵呵呵',
       sw: [{color:'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1312092207,1376369244&fm=80&w=100&h=100&img.JPEG',val:1},{color:'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1312092207,1376369244&fm=80&w=179&h=119&img.JPEG',val:2},{color:'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1312092207,1376369244&fm=80&w=179&h=119&img.JPEG',val:3}],
       newsList:[],
+      pageNum:1
      
     }
   },
@@ -61,11 +64,32 @@ export default {
   //   // }
   //   this.loading = false;
   // }, 2500);
-}
+},
+ listplus: function () {
+      // `this` points to the vm instance
+       var that=this;
+       that.pageNum++;
+    var url='/api/remote/cms/findNewsPage?pageNum='+that.pageNum
+      this.$http.get(url).then(function(data){
+           // var jsonObject = data;
+           // console.log(jsonObject)
+           console.log(data.body.body.list)
+           var temp=data.body.body.list;
+           for(var i=0;i<temp.length;i++){
+            that.newsList.push(data.body.body.list[i]);
+           }
+          
+           console.log(that.newsList)
+                },function(response){
+                    console.info(response);
+                    console.log(222)
+                })
+     
+    }
   },
   created :function(){
     var that=this;
-    var url='/api/remote/cms/findNewsPage?pageNum=1'
+    var url='/api/remote/cms/findNewsPage?pageNum='+that.pageNum
       this.$http.get(url).then(function(data){
            // var jsonObject = data;
            // console.log(jsonObject)
@@ -78,11 +102,7 @@ export default {
   },
   computed: {
     // a computed getter
-    reversedMessage: function () {
-      // `this` points to the vm instance
-
-     
-    }
+   
   }
 }
 </script>
