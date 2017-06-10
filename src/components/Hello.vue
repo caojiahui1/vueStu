@@ -1,6 +1,7 @@
 <template>
   <div class="myBox" style="padding:10px;">
 
+    
     <h2>{{newsList.title}}</h2>
 
     <div v-html="newsList.content"></div>
@@ -18,7 +19,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'hello',
   data () {
@@ -35,7 +35,6 @@ export default {
    created(){
      this.id = this.$route.query.id;
      console.log(this.id)
-
          var that=this;
     var url='/api/remote/cms/findNewsById?id='+this.id
       this.$http.get(url).then(function(data){
@@ -47,10 +46,8 @@ export default {
                     console.info(response);
                     console.log(222)
                 })
-
         },
   methods : {
-
     plus: function () {
       alert(2)
     },
@@ -68,12 +65,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
 ul {
   list-style-type: none;
   padding: 0;
 }
-
 .myBox img{width: 100%;}
 p img{float: left;}
 a {

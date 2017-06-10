@@ -1,12 +1,17 @@
 <template>
-  <div id="app">
+  <div id="app"> 
+  <My>2122</My>  
+    <router-view>
+    	<header>1112</header>
+    </router-view>
     
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import My from '@/components/header'
 export default {
+  component:{My},
   name: 'app'
 }
 </script>
@@ -14,4 +19,5 @@ export default {
 <style>
 html,body{padding: 0;margin: 0}
 a{text-decoration: none;}
+
 </style>
