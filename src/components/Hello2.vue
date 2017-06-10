@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+
+
    <router-link to="/" class="hide">跳到hello1</router-link>
    <mt-swipe :auto="4000" style="height: 150px;">
     <mt-swipe-item  v-for="item in sw">
@@ -10,7 +12,7 @@
     <li v-for="item in newsList"  style="display:flex;padding:10px 10px;">
       <img :src="item.image_url" style="height:100%;width: 20%;"/>
       <div style="display: flex; flex-direction:column;justify-content: flex-start;width:80%;">
-       <router-link :to='{path: "/", query: {id: item.id}}'  >{{item.title.substring(0,15)}}...</router-link>
+       <router-link :to='{path: "hello", query: {id: item.id}}'  >{{item.title.substring(0,15)}}...</router-link>
       </div>
     </li>
 </ul>
@@ -92,7 +94,7 @@ export default {
 <style scoped>
 .hide{display: none;}
 ul{padding: 0;}
-li{list-style: none;height: 50px;line-height: 50px;text-align: center;color: #666;border: 1px solid #e3e3e3;border-radius: 5px;background: #e3e3e3;margin-top: 10px;}
+li{list-style: none;height: 80px;text-align: center;color: #666;border: 1px solid #e3e3e3;border-radius: 5px;background: #e3e3e3;margin-top: 10px;}
 .imgSize{width:100%;height:100%;}
 a{overflow: hidden;}
 </style>

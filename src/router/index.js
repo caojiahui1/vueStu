@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Hello2 from '@/components/Hello2'
-import header from '@/components/header'
+import register from '@/components/register'
 
 Vue.use(Router)
 
@@ -21,10 +21,10 @@ export default new Router({
      // name: 'Hello2',
 	   component: Hello
 	  },
-    {
-     path: '/header',
+        {
+     path: '/register',
      // name: 'Hello2',
-     component: header
+     component: register
     }
   ]
 })
