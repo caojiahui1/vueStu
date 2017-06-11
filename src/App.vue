@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import store from './vuex'
 export default {
   name: 'app',
     data () {
@@ -34,7 +35,8 @@ export default {
       open: false,
       docked: true,
       ic:'menu',
-      title:"首页"
+      title:'123'
+      
     }
   },
   methods: {
@@ -42,6 +44,9 @@ export default {
       this.open = !this.open
       this.docked = !flag
     }
+  },
+  created :function(){
+    this.title=store.state.title
   }
 }
 </script>

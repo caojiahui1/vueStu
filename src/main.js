@@ -8,6 +8,7 @@ import 'mint-ui/lib/style.css';
 import VueResource from 'vue-resource';
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+import store from './vuex'
 Vue.use(MuseUI)
 
 Vue.use(VueResource);
@@ -18,6 +19,11 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App}
 })
+
+
+
+
