@@ -10,5 +10,8 @@ export default{
     },
     isLoginchange (state,flag) {
       state.isLogin=flag
+    },
+    namechange (state,flag) {
+      state.myName=flag
     }
 }

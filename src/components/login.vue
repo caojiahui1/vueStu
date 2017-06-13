@@ -52,18 +52,23 @@ export default {
     var url='/api/remote/h5User/login?phone='+phone+'&pwd='+pwd+'&sign='+sign+'&timestamp='+timestamp
       console.log(url)
       this.$http.get(url).then(function(data){
-           console.log(data.body.message)
+      
+   
+          console.log(data.body.message)
             Indicator.open(data.body.message);
-
              util.store.setItem('_user_',util.jsonToString(data.body.body));
              that.username2=util.store.getItem('_user_')
-              store.commit('isLoginchange',false)
-              store.commit('myLoginchange',true)
+             // store.commit('isLoginchange',false)
+             // store.commit('myLoginchange',true)
+               store.commit('namechange',that.username2.username)
+               console.log(that.username2.username)
              console.log(that.username2)
               setTimeout(function(){
                        Indicator.close()
                     },1000)
+                this.$router.push({path:'/'})
 
+           
                 },function(response){
                     console.info(response);
                 })
