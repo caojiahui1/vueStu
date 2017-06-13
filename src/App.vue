@@ -11,7 +11,8 @@
 
     <mu-drawer :open="open" :docked="docked" @close="toggle()">
       <mu-list @itemClick="toggle()">
-        <mu-list-item  ><router-link to="/login">登录/注册</router-link></mu-list-item>
+        <mu-list-item v-if="haha"><router-link to="/login">登录/注册</router-link></mu-list-item>
+         <mu-list-item v-if="heihei"><router-link to="/login">哈哈哈</router-link></mu-list-item>
         <mu-list-item  ><router-link to="/">首页</router-link></mu-list-item>
         <mu-list-item title="资本视野"/>
         <mu-list-item title="资本需求"/>
@@ -55,7 +56,14 @@ export default {
     computed: {
     count () {
       return store.state.title
+    },
+    haha (){
+    return store.state.isLogin
+    },
+    heihei (){
+     return store.state.myLogin
     }
+
   }
 }
 </script>

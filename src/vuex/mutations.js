@@ -4,5 +4,11 @@ export default{
     },
     titlechange (state,change) {
       state.title=change
+    },
+    myLoginchange (state,flag) {
+      state.myLogin=flag
+    },
+    isLoginchange (state,flag) {
+      state.isLogin=flag
     }
 }
