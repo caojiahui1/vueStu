@@ -3,7 +3,7 @@
 
 <mu-appbar  style="text-align: center;position: fixed;top: 0;">
   <mu-icon-button  slot="left"  icon="menu" style="position: absolute;left:0;" label="undocked drawer" @click="toggle(true)"/>
-  {{title}}
+  {{count}}
 </mu-appbar>
 <mu-appbar title="Title" style="text-align: center;visibility: hidden">
 
@@ -11,7 +11,7 @@
 
     <mu-drawer :open="open" :docked="docked" @close="toggle()">
       <mu-list @itemClick="toggle()">
-        <mu-list-item  ><router-link to="/register">登录/注册</router-link></mu-list-item>
+        <mu-list-item  ><router-link to="/login">登录/注册</router-link></mu-list-item>
         <mu-list-item  ><router-link to="/">首页</router-link></mu-list-item>
         <mu-list-item title="资本视野"/>
         <mu-list-item title="资本需求"/>
@@ -46,7 +46,16 @@ export default {
     }
   },
   created :function(){
-    this.title=store.state.title
+    
+   store.commit('titlechange','首页列表')
+    this.title=store.state.title;
+    
+     
+  },
+    computed: {
+    count () {
+      return store.state.title
+    }
   }
 }
 </script>

@@ -25,7 +25,7 @@
 <script>
 import { Swipe, SwipeItem ,InfiniteScroll ,loading} from 'mint-ui';
 import { Indicator } from 'mint-ui';
-
+import store from '../vuex'
 export default {
 
   name: 'hello2',
@@ -86,6 +86,8 @@ export default {
           },function(response){
               console.info(response);
           })
+
+      store.commit('titlechange','首页列表')
      }
 }
 </script>

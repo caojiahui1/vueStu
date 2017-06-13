@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import store from '../vuex'
 export default {
   name: 'hello',
   data () {
@@ -27,7 +28,8 @@ export default {
       newsList:'',
       myPing:1,
       pinglist:['嘎哈呢','咋的了'],
-      iptVal:''
+      iptVal:'',
+      title:''
     }
     
   },
@@ -45,6 +47,12 @@ export default {
                     console.info(response);
                     console.log(222)
                 })
+        store.commit('increment')
+
+        store.commit('titlechange','详情')
+         this.title=store.state.title;
+         console.log(this.title)
+
         },
   methods : {
     plus: function () {
@@ -57,6 +65,11 @@ export default {
       that.iptVal=''
       }
      
+    }
+  },
+  computed: {
+    count () {
+      return store.state.title
     }
   }
 }

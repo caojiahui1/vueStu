@@ -1,3 +1,4 @@
 export default{
-	title:'我是首页'
+	title:1,
+	mytitle:'不是首页'
 }
