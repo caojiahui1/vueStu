@@ -12,15 +12,14 @@
     <mu-drawer :open="open" :docked="docked" @close="toggle()">
       <mu-list @itemClick="toggle()">
         <mu-list-item v-if="haha"><router-link to="/login">登录/注册</router-link></mu-list-item>
-         <mu-list-item v-if="heihei"><router-link to="/login">{{xixi}}</router-link></mu-list-item>
+         <mu-list-item v-if="heihei"><router-link to="/login">{{mylogin}}</router-link></mu-list-item>
         <mu-list-item  ><router-link to="/">首页</router-link></mu-list-item>
         <mu-list-item title="资本视野"/>
         <mu-list-item title="资本需求"/>
-        <mu-list-item title="老股转让"/>
-        <mu-list-item  @click.native="open = false" title="关闭"/>
+        <mu-list-item title="老股转让" @click.native="open = false"/>
+        <mu-list-item  v-if="heihei" @click='loginOut'  title="退出"/>
       </mu-list>
     </mu-drawer>
-
     <router-view>
     </router-view>
     
@@ -29,6 +28,7 @@
 
 <script>
 import store from './vuex'
+import { Indicator } from 'mint-ui';
 export default {
   name: 'app',
     data () {
@@ -36,7 +36,8 @@ export default {
       open: false,
       docked: true,
       ic:'menu',
-      title:'123'
+      my:'123',
+      myUser:''
       
     }
   },
@@ -44,14 +45,28 @@ export default {
     toggle (flag) {
       this.open = !this.open
       this.docked = !flag
+    },
+    loginOut (){
+      var that=this
+      
+ Indicator.open('正在退出');
+            
+              store.commit('isLoginchange',true)
+              store.commit('myLoginchange',false)
+              store.commit('namechange',that.myUser)
+               util.store.removeItem('_user_');
+                //window.location.reload();
+              setTimeout(function(){
+                       Indicator.close()
+                    },1000)
     }
   },
   created :function(){
     
    store.commit('titlechange','首页列表')
-    this.title=store.state.title;
+   // this.title=store.state.title;
     
-     console.log(util.store.getItem('_user_').username)
+     //console.log(util.store.getItem('_user_').username)
   },
   computed: {
     count () {
@@ -64,7 +79,25 @@ export default {
      return store.state.myLogin
     },
     xixi (){
-     return store.state.myName
+     let username=JSON.parse(store.state.myName)
+     return username.username
+    },
+    mylogin (){
+      let user = util.store.getItem('_user_')||{}
+      console.log(111)
+      console.log(user)
+      if(user!=null){
+        store.commit('isLoginchange',false)
+        store.commit('myLoginchange',true)
+        let username=JSON.parse(store.state.myName)
+        return username.username
+        
+      }else{
+        store.commit('isLoginchange',true)
+        store.commit('myLoginchange',false)
+        return  222
+      }
+
     }
 
   }

@@ -8,10 +8,10 @@ export default{
     myLoginchange (state,flag) {
       state.myLogin=flag
     },
-    isLoginchange (state,flag) {
-      state.isLogin=flag
+    isLoginchange (state,a) {
+      state.isLogin=a
     },
-    namechange (state,flag) {
-      state.myName=flag
+    namechange (state,b) {
+      state.myName=b
     }
 }

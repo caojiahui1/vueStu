@@ -2,6 +2,6 @@ export default{
 	title:1,
 	mytitle:'不是首页',
 	isLogin:true,
-	myLogin:true,
+	myLogin:false,
 	myName:'11'
 }
