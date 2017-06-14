@@ -12,12 +12,12 @@
     <mu-drawer :open="open" :docked="docked" @close="toggle()">
       <mu-list @itemClick="toggle()">
         <mu-list-item v-if="haha"><router-link to="/login">登录/注册</router-link></mu-list-item>
-         <mu-list-item v-if="heihei"><router-link to="/login">{{mylogin}}</router-link></mu-list-item>
-        <mu-list-item  ><router-link to="/">首页</router-link></mu-list-item>
+         <mu-list-item v-if="heihei"><router-link to="/userCon">{{mylogin}}</router-link></mu-list-item>
+        <mu-list-item ><router-link to="/">首页</router-link></mu-list-item>
         <mu-list-item title="资本视野"/>
         <mu-list-item title="资本需求"/>
         <mu-list-item title="老股转让" @click.native="open = false"/>
-        <mu-list-item  v-if="heihei" @click='loginOut'  title="退出"/>
+        <mu-list-item  v-if="heihei" @click.native='loginOut'  title="退出"></mu-list-item>
       </mu-list>
     </mu-drawer>
     <router-view>
@@ -28,6 +28,7 @@
 
 <script>
 import store from './vuex'
+import router from './router'
 import { Indicator } from 'mint-ui';
 export default {
   name: 'app',
@@ -57,7 +58,9 @@ export default {
                util.store.removeItem('_user_');
                 //window.location.reload();
               setTimeout(function(){
+
                        Indicator.close()
+                       that.$router.push({path:'/'})
                     },1000)
     }
   },

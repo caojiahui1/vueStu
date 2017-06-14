@@ -1,20 +1,21 @@
 <template>
   <div class="myBox" style="padding:10px;">
-    <h2 style="text-align: center;font-size: 26px;">登录</h2>
+    <h2 style="text-align: center;font-size: 26px;">注册</h2>
   <mu-text-field label="账号" hintText="请输入账号" v-model='username' labelFloat fullWidth/><br/>
   <mu-text-field label="密码" hintText="请输入密码" v-model='password' type="password" labelFloat fullWidth/><br/>
+  <mu-text-field label="确认密码" hintText="请再次输入密码" v-model='password' type="password" labelFloat fullWidth/><br/>
 
       <mu-raised-button @click='changeRouter' label="提交" class="demo-raised-button" primary fullWidth/>
 
 
-  <mu-raised-button  label="注册" class="demo-raised-button" secondary fullWidth/>
-  <mu-raised-button  label="忘记密码" class="demo-raised-button" secondary fullWidth/>
+  
+  <mu-raised-button to='login' label="登录" class="demo-raised-button" secondary fullWidth/>
     </div>
 </template>
 
 <script>
-import store from '../vuex'
-import router from '../router'
+import store from '../../vuex'
+import router from '../../router'
 import { Indicator } from 'mint-ui';
 export default {
   data () {

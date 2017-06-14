@@ -7,14 +7,14 @@
       <mu-raised-button @click='changeRouter' label="提交" class="demo-raised-button" primary fullWidth/>
 
 
-  <mu-raised-button  label="注册" class="demo-raised-button" secondary fullWidth/>
+  <mu-raised-button to='register' label="注册" class="demo-raised-button" secondary fullWidth/>
   <mu-raised-button  label="忘记密码" class="demo-raised-button" secondary fullWidth/>
     </div>
 </template>
 
 <script>
-import store from '../vuex'
-import router from '../router'
+import store from '../../vuex'
+import router from '../../router'
 import { Indicator } from 'mint-ui';
 export default {
   data () {
