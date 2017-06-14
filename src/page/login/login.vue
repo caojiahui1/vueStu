@@ -8,7 +8,7 @@
 
 
   <mu-raised-button to='register' label="注册" class="demo-raised-button" secondary fullWidth/>
-  <mu-raised-button  label="忘记密码" class="demo-raised-button" secondary fullWidth/>
+  <mu-raised-button  to='forget' label="忘记密码" class="demo-raised-button" secondary fullWidth/>
     </div>
 </template>
 

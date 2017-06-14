@@ -10,6 +10,7 @@ import newsDetail from '@/page/news/newsDetail/newsDetail'
 import login from '@/page/login/login'
 import userCon from '@/page/login/userCon'
 import register from '@/page/register/register'
+import forget from '@/page/forget/forget'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
      path: '/register',
      // name: 'Hello2',
      component: register
+    },
+     {
+     path: '/forget',
+     // name: 'Hello2',
+     component: forget
     }
   ]
 })

@@ -44,8 +44,6 @@ export default {
      //this.$router.push({path:'/'})
      //this.username2=hex_md5(this.uesename)
 
-
-
     var that=this;
     var timestamp = util.timeStamp();
     var sign  = hex_md5(that.username+'|'+hex_md5(that.password)+'|'+timestamp);
