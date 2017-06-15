@@ -14,8 +14,8 @@
         <mu-list-item v-if="haha"><router-link to="/login">登录/注册</router-link></mu-list-item>
          <mu-list-item v-if="heihei"><router-link to="/userCon">{{mylogin}}</router-link></mu-list-item>
         <mu-list-item ><router-link to="/">首页</router-link></mu-list-item>
-        <mu-list-item title="资本视野"/>
-        <mu-list-item title="资本需求"/>
+        <mu-list-item title="资本视野" to="/" @click.native="open = false"/>
+        <mu-list-item title="资本需求" to="demand" @click.native="open = false"/>
         <mu-list-item title="老股转让" @click.native="open = false"/>
         <mu-list-item  v-if="heihei" @click.native='loginOut'  title="退出"></mu-list-item>
       </mu-list>

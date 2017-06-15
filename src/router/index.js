@@ -11,6 +11,7 @@ import login from '@/page/login/login'
 import userCon from '@/page/login/userCon'
 import register from '@/page/register/register'
 import forget from '@/page/forget/forget'
+import demand from '@/page/demand/demand/demand'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
      path: '/forget',
      // name: 'Hello2',
      component: forget
+    },
+     {
+     path: '/demand',
+     // name: 'Hello2',
+     component: demand
     }
   ]
 })
