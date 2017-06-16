@@ -1,51 +1,63 @@
 <template>
-  <div class="hello">
-    
-
-
-
+<div class="hello">
   
 <mu-row gutter style="margin-top: 10px;margin-bottom: 10px;">
-    
-<mu-col width="5" tablet="50" desktop="33" >
-  
-  </mu-col>
+   <mu-col width="5" tablet="50" desktop="33" >
+   </mu-col>
+   <mu-col width="30" tablet="50" desktop="33" >
+     <select class="selSty" @change='selectClick()' v-model="demandTypeId">
+       <option :value="0">请选择</option>
+       <option v-for="item in typeList" :value="item.id">{{item.name}}</option>
+     </select>
+   </mu-col>
+      {{demandTypeId}}
+   <mu-col width="1" tablet="50" desktop="33" >
 
-
-  <mu-col width="30" tablet="50" desktop="33" >
-    <select class="selSty" @change='selectClick()' v-model="demandTypeId">
-     <option :value="0">请选择</option>
-      <option v-for="item in typeList" :value="item.id">{{item.name}}</option>
-    </select>
-  </mu-col>
-{{demandTypeId}}
-<mu-col width="1" tablet="50" desktop="33" >
-
-  </mu-col>
-
+   </mu-col>
 
   <mu-col width="30" tablet="50" desktop="33" >
     <select class="selSty"  @change='selectClick()' v-model="supplyDemandType">
-
       <option v-for="item in list" :value="item.id">{{item.name}}</option>
     </select>
   </mu-col>
 
-<mu-col width="30" tablet="50" desktop="33" >
-  <mu-raised-button @click=''  class="smsBtn demo-raised-button" fullWidth>免费发布需求</mu-raised-button>
+  <mu-col width="30" tablet="50" desktop="33" >
+   <mu-raised-button @click=''  class="smsBtn demo-raised-button" fullWidth>免费发布需求</mu-raised-button>
   </mu-col>
-
-    </mu-row>
+</mu-row>
+  
+<div style="background:#f2f2f2">
+<mu-row v-for="item in demandList" gutter style="height:80px;min-height: 80px;margin-top: 10px;margin-bottom: 10px;padding:10px;padding-left:0;background:#fff;"> 
+    <mu-col  width="40" tablet="50" desktop="33" :class="item.supplyDemandType== 1 ? 'redSty':'blueSty' ">
+        {{item.demandTypeString}}  
+    </mu-col>
    
+     <mu-col  width="15" tablet="50" desktop="33" style="height: 60px;line-height: 60px;text-align: center;">
+        
+        <mu-badge :content=item.supplyDemandString  circle  secondary>
+             
+        </mu-badge>
+    </mu-col>
+  <mu-col  width="50" tablet="50" desktop="33" class="mySty">
+    <mu-col  width="100" tablet="50" desktop="33">
+      {{item.title}}
+    </mu-col>
+    <mu-col  width="100" tablet="50" desktop="33">
+        {{item.pv}} {{item.dateString}}
+    </mu-col>
+  </mu-col>
+</mu-row>
+</div>
 
-  <ul>
+
+  <!-- <ul>
     <li v-for="item in demandList"  style="display:flex;padding:10px 10px;">
-      <!-- <img :src="item.image_url" style="height:100%;width: 20%;"/> -->
+      <img :src="item.image_url" style="height:100%;width: 20%;"/> 
       <div style="display: flex; flex-direction:column;justify-content: flex-start;width:80%;">
        <router-link :to='{path: "newsDetail", query: {id: item.demandId}}'  >{{item.title.substring(0,15)}}...</router-link>
       </div>
     </li>
-</ul>
+</ul> -->
 <div style="text-align: center;width:100%;" v-if="btnClose">
   <mt-button type="danger" @click='listplus'>加载更多</mt-button>
 </div>
@@ -77,6 +89,7 @@ export default {
    methods : {
     selectClick:function(event){
       let that=this;
+      that.pageNum=1
                let listUrl='/api/remote/appDemand/findAPPDemandList?demandTypeId='+that.demandTypeId+'&supplyDemandType='+that.supplyDemandType+'&pageNum='+that.pageNum
               this.$http.get(listUrl).then(function(data){
            that.demandList=data.body.body.list
@@ -88,6 +101,7 @@ export default {
     },
         selectClick2:function(event){
       let that=this;
+      that.pageNum=1
                let listUrl='/api/remote/appDemand/findAPPDemandList?demandTypeId='+that.demandTypeId+'&supplyDemandType='+that.supplyDemandType+'&pageNum='+that.pageNum
               this.$http.get(listUrl).then(function(data){
            that.demandList=data.body.body.list
@@ -207,4 +221,20 @@ a{overflow: hidden;}
     width: 100%;
     height: 30px;
     line-height: 30px;}
+    .redSty{height: 40px;line-height: 25px;margin-top: 10px;border-radius: 10px 0 10px 0px;border:3px solid red;padding:5px;border-left: 0;}
+    .blueSty{height: 40px;line-height: 25px;margin-top: 10px;border-radius: 10px 0 10px 0px;border:3px solid blue;padding:5px;border-left: 0;}
+    .mySty{    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;}
+
+    .mu-badge{background-color: #fff!important;}
+    .gongsty{
+      background: #7e57c2;
+      border-radius: 50%;
+    }
+    .qiusty{
+      background: #ff4081;
+      border-radius: 50%;
+    }
 </style>
