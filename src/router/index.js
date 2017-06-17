@@ -12,6 +12,8 @@ import userCon from '@/page/login/userCon'
 import register from '@/page/register/register'
 import forget from '@/page/forget/forget'
 import demand from '@/page/demand/demand/demand'
+import demandDetail from '@/page/demand/demandDetail/demandDetail'
+import demandRealese from '@/page/demand/demandRealese/demandRealese'
 
 Vue.use(Router)
 
@@ -54,6 +56,16 @@ export default new Router({
      path: '/demand',
      // name: 'Hello2',
      component: demand
+    },
+     {
+     path: '/demandDetail',
+     // name: 'Hello2',
+     component: demandDetail
+    },
+     {
+     path: '/demandRealese',
+     // name: 'Hello2',
+     component: demandRealese
     }
   ]
 })
