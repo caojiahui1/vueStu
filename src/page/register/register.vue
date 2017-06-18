@@ -2,32 +2,28 @@
   <div class="myBox" style="padding:10px;">
     <h2 style="text-align: center;font-size: 26px;">注册</h2>
   
-<mu-row gutter>
+    <mu-row gutter>
     
-  <mu-col width="100" tablet="50" desktop="33" class="phoneBox">
-    <mu-text-field label="手机号" hintText="请输入手机号" v-model='phone' labelFloat fullWidth/>
-    <mu-raised-button @click='smsBtn'  class="smsBtn demo-raised-button" primary >{{value}}</mu-raised-button>
-  </mu-col>
+     <mu-col width="100" tablet="50" desktop="33" class="phoneBox">
+       <mu-text-field label="手机号" hintText="请输入手机号" v-model='phone' labelFloat fullWidth/>
+       <mu-raised-button @click='smsBtn'  class="smsBtn demo-raised-button" primary >{{value}}</mu-raised-button>
+     </mu-col>
     
+     <mu-col width="100" tablet="50" desktop="33">
+        <mu-text-field label="验证码" hintText="请输入验证码" v-model='smscode' type="text" labelFloat fullWidth/><br/>
+     </mu-col>
 
-      <mu-col width="100" tablet="50" desktop="33">
-            <mu-text-field label="验证码" hintText="请输入验证码" v-model='smscode' type="text" labelFloat fullWidth/><br/>
-      </mu-col>
+     <mu-col width="100" tablet="50" desktop="33">
+        <mu-raised-button @click='submitRegister' label="提交" class="demo-raised-button btnstyle" primary fullWidth/>
+     </mu-col>
 
-      <mu-col width="100" tablet="50" desktop="33">
-           <mu-raised-button @click='submitRegister' label="提交" class="demo-raised-button btnstyle" primary fullWidth/>
-      </mu-col>
-
-
-      <mu-col width="100" tablet="50" desktop="33">
-            <mu-raised-button to='login' label="登录" class="demo-raised-button btnstyle" secondary fullWidth/>
-      </mu-col>
+     <mu-col width="100" tablet="50" desktop="33">
+        <mu-raised-button to='login' label="登录" class="demo-raised-button btnstyle" secondary fullWidth/>
+     </mu-col>
       
   </mu-row>
 
-
-
-    </div>
+ </div>
 </template>
 
 <script>
@@ -36,6 +32,7 @@ import router from '../../router'
 import { Indicator } from 'mint-ui';
 export default {
   data () {
+
     return {
       phone:'',
       smscode:'',
@@ -46,55 +43,56 @@ export default {
     
   },
    created(){
-      store.commit('titlechange','登录/注册')   
+
+      store.commit('titlechange','登录/注册')  
+
         },
   methods : {
- 
 
     smsBtn : function(){
-      var that=this
-      
+
+      let that=this
       if(that.getSmsStatus==false){
+
         Indicator.open('请不要重复获取',1000)
         setTimeout(function(){Indicator.close()},1000)
-        
         return false
+
       }
+
       that.value=60;
       that.getSmsStatus=false
-     var timer= setInterval(function(){
+      let timer= setInterval(function(){
+
         that.value--
         if(that.value==0){
+
             clearInterval(timer);
             that.value='再次获取'
             that.getSmsStatus=true
+
         }
       },100);
       this.smsAjax()
 
     },
-    smsAjax : function(){
-     //this.$router.push({path:'/'})
-     //this.username2=hex_md5(this.uesename)
-     // http://m.hongsanban.com/remote/h5User/getSmsCode?phone=18601063926&type=register&sign=17d5678cc0468bb94b5323acf2841681&time=1497448346520
-    var that=this;
-    var timestamp = util.timeStamp();
-    var sign  = this.getSign(that.phone,"register")
-    var smscode=hex_md5(that.smscode);
-    var phone=that.phone;
-    console.log(phone)
-    var url='/api/remote/h5User/getSmsCode?phone='+phone+'&type=register'+'&sign='+sign
-      console.log(url)
+    smsAjax (){
+     
+    let that=this;
+    let timestamp = util.timeStamp();
+    let sign  = this.getSign(that.phone,"register")
+    let smscode=hex_md5(that.smscode);
+    let phone=that.phone;
+    let url='/api/remote/h5User/getSmsCode?phone='+phone+'&type=register'+'&sign='+sign
       this.$http.get(url).then(function(data){
             if(data.status==200){
-            console.log(data.body.message)
-            Indicator.open(data.body.message);
+
+             Indicator.open(data.body.message);
              util.store.setItem('_user_',util.jsonToString(data.body.body));
 
               setTimeout(function(){
                        Indicator.close()
                     },1000)
-                //this.$router.push({path:'/'})
             }
            
                 },function(response){
@@ -102,31 +100,29 @@ export default {
                 })
     },
    getSign : function(phone,type){
-    var strs="phone="+phone+"&type="+type+"pctqpc5yf5zh79pLoI5KrhkFnhdv0EL";
-    var sign=hex_md5(strs);
+    let strs="phone="+phone+"&type="+type+"pctqpc5yf5zh79pLoI5KrhkFnhdv0EL";
+    let sign=hex_md5(strs);
     return sign;
     },
     submitRegister:function(){
-      var that = this;
-     
-       var url='/api/remote/h5User/regist?phone='+that.phone+'&code='+that.smscode
-      console.log(url)
-      this.$http.get(url).then(function(data){
+
+    let that = this;
+    let url='/api/remote/h5User/regist?phone='+that.phone+'&code='+that.smscode
+    this.$http.get(url).then(function(data){
             if(data.status==200){
-            console.log(data.body.message)
+              
             Indicator.open(data.body.message);
-             util.store.setItem('_user_',util.jsonToString(data.body.body));
-             that.username2=util.store.getItem('_user_')
+            util.store.setItem('_user_',util.jsonToString(data.body.body));
+            that.username2=util.store.getItem('_user_')
               store.commit('isLoginchange',false)
               store.commit('myLoginchange',true)
               store.commit('namechange',that.username2)
-              console.log(that.username2.username)
-              console.log(that.username2)
               setTimeout(function(){
+
                        Indicator.close()
+
                     },1000)
-                //this.$router.push({path:'/'})
-            }
+               }
            
                 },function(response){
                     console.info(response);
@@ -137,7 +133,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 ul {
   list-style-type: none;

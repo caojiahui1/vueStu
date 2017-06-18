@@ -60,7 +60,7 @@ import router from '../../../router'
 export default {
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
+
       btnMsg:'确认',
       newsList:'',
       myPing:1,
@@ -77,17 +77,17 @@ export default {
     
   },
    created(){
-    var that=this;
+
+    let that=this;
     this.id = this.$route.query.demandId;
-    console.log(this.id)
     let user = util.store.getItem('_user_')||{}
     if(user===null){
 
     }else{
-      user = JSON.parse(user)
-    console.log(user.uuid);
-    console.log(21212);
+
+    user = JSON.parse(user)
     that.uuid=user.uuid
+
     }
     
     this.getDetail();
@@ -95,103 +95,88 @@ export default {
     store.commit('increment')
     store.commit('titlechange','详情')
     this.title=store.state.title;
-    console.log(this.title)
+
         },
   methods : {
+
     showToast () {
+
       this.toast = true
       if (this.toastTimer) clearTimeout(this.toastTimer)
       this.toastTimer = setTimeout(() => { this.toast = false }, 2000)
+
     },
     hideToast () {
+
       this.toast = false
       if (this.toastTimer) clearTimeout(this.toastTimer)
-    },
-    plus: function () {
-      alert(2)
+
     },
     addList : function (){
-      let that=this;
-     
 
-      
-       let url='/api/remote/h5User/isLogin?uuid='+that.uuid; 
-        this.$http.get(url).then(function(data){
-          console.log(data.status);
-          
-           
-         if(that.iptVal!=''){
-         let url='/api/remote/cms/doCommentsing?objId='+that.id+'&type=1&content='+that.iptVal+'&uuid='+that.uuid;
-         this.$http.get(url).then(function(data){
+      let that=this;
+      let url='/api/remote/h5User/isLogin?uuid='+that.uuid; 
+      this.$http.get(url).then(function(data){
+        if(that.iptVal!=''){
+        let url='/api/remote/cms/doCommentsing?objId='+that.id+'&type=1&content='+that.iptVal+'&uuid='+that.uuid;
+          this.$http.get(url).then(function(data){
           
            that.showToast()
-that.getPingList()
-    
+           that.getPingList()
 
                 },function(response){
                     console.info(response);
-                    console.log(222)
                 })
-       
-
-      that.iptVal=''
+         that.iptVal=''
       }
 
-
-
-
-           
-
                 },function(response){
                     console.info(response);
-                    console.log(222)
                 })
-      
-      
-
      
     },
     getDetail:function(){
-      let that=this;
-      var url='/api/remote/appDemand/getDemandInfo?demandId='+this.id
-      this.$http.get(url).then(function(data){
-           // var jsonObject = data;
-           // console.log(jsonObject)
-           that.newsList=data.body.body;
-           console.log(that.newsList)
-                },function(response){
-                    console.info(response);
-                    console.log(222)
-                })
-        store.commit('increment')
 
+      let that=this;
+      let url='/api/remote/appDemand/getDemandInfo?demandId='+this.id
+      this.$http.get(url).then(function(data){
+       
+           that.newsList=data.body.body;
+                },function(response){
+
+                    console.info(response);
+
+                })
+
+        store.commit('increment')
         store.commit('titlechange','详情')
-         this.title=store.state.title;
-         console.log(this.title)
+        this.title=store.state.title;
     },
     getPingList:function(){
       let that=this;
-      var url='/api/remote/appDemand/findAPPCommentList?pingPageNum='+that.pingPageNum+'&pageSize=5&demandId='+that.id;
+      let url='/api/remote/appDemand/findAPPCommentList?pingPageNum='+that.pingPageNum+'&pageSize=5&demandId='+that.id;
       this.$http.get(url).then(function(data){
-           // var jsonObject = data;
-           // console.log(jsonObject)
+
            that.pinglist=data.body.body.list;
            that.totalCount=data.body.body.totalCount
+
                 },function(response){
+
                     console.info(response);
-                    console.log(222)
+
                 })
        
     }
   },
   computed: {
+
     count () {
       return store.state.title
     }
+    
   }
 }
 </script> 
-  <!-- Add "scoped" attribute to limit CSS to this component only --> 
   <style>
 ul {
   list-style-type: none;
