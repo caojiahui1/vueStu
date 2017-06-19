@@ -5,16 +5,13 @@
     <div>相关评论({{pinglist.length}})</div>
     <div style="margin: 20px 0;"><input type="text"  style="height:30px;" v-model='iptVal' /><mt-button type="primary" @click='addList'>primary</mt-button></div>
     <div v-for="item in pinglist">{{item}}</div>
-      <router-link to="/">跳到hello2</router-link>
-     
-      <mt-button type="primary">primary</mt-button>
-      <mt-button type="danger">danger</mt-button>
+      
    </div>
 </template>
 
 <script>
 import store from '../../../vuex'
-import router from '../../../router'
+
 export default {
 
   data () {

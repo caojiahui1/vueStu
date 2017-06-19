@@ -56,7 +56,7 @@
   </template> 
   <script>
 import store from '../../../vuex'
-import router from '../../../router'
+
 export default {
   data () {
     return {
@@ -80,14 +80,12 @@ export default {
 
     let that=this;
     this.id = this.$route.query.demandId;
-    let user = util.store.getItem('_user_')||{}
-    if(user===null){
-
-    }else{
-
+    let user = util.store.getItem('_user_')
+    console.log(user)
+    if(user!==null){
     user = JSON.parse(user)
+    console.log(user.uuid)
     that.uuid=user.uuid
-
     }
     
     this.getDetail();

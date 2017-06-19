@@ -14,7 +14,7 @@
       <mu-list @itemClick="toggle()">
         <mu-list-item v-if="isLogin"><router-link to="/login">登录/注册</router-link></mu-list-item>
          <mu-list-item v-if="myLogin"><router-link to="/userCon">{{username}}</router-link></mu-list-item>
-        <mu-list-item title='首页' to="/" />
+        <mu-list-item title='首页' to="/" @click.native="open = false"/>
         <mu-list-item title="资本视野" to="/" @click.native="open = false"/>
         <mu-list-item title="资本需求" to="demand" @click.native="open = false"/>
         <mu-list-item title="老股转让" @click.native="open = false"/>
@@ -70,8 +70,9 @@ export default {
     },
     checkLogin(){
       let user = util.store.getItem('_user_')  
-      
-      if(user!=null){
+      console.log(user)
+      if(user!==null){
+        
         console.log('瞎提交')
         store.commit('isLoginchange',false)
         store.commit('myLoginchange',true)
@@ -80,7 +81,7 @@ export default {
         store.commit('namechange',username.username)
         
       }else{
-
+       
         store.commit('isLoginchange',true)
         store.commit('myLoginchange',false)
         store.commit('namechange','登录/注册')

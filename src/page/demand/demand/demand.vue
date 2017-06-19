@@ -63,7 +63,7 @@
 import { Swipe, SwipeItem ,InfiniteScroll ,loading} from 'mint-ui';
 import { Indicator } from 'mint-ui';
 import store from '../../../vuex';
-import router from '../../../router'
+
 export default {
 
   name: 'hello2',
@@ -87,7 +87,7 @@ export default {
    methods : {
 
     realese(){
-      router.push({'path':'demandRealese'})
+      this.$router.push({'path':'demandRealese'})
     },
     selectClick:function(event){
 
@@ -117,7 +117,7 @@ export default {
     },
     plus: function (eve) {
 
-      router.push({path: '/demandDetail', query: {demandId: eve}});
+      this.$router.push({path: '/demandDetail', query: {demandId: eve}});
 
     },
    

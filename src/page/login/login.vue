@@ -44,9 +44,21 @@ export default {
     let sign  = hex_md5(that.username+'|'+hex_md5(that.password)+'|'+timestamp);
     let pwd=hex_md5(that.password);
     let phone=that.username;
-    let url='/api/remote/h5User/login?phone='+phone+'&pwd='+pwd+'&sign='+sign+'&timestamp='+timestamp
+    if(that.username==''){
+      Indicator.open('账号错误');
+      setTimeout(function(){
+                    Indicator.close()
+                    },1000)
+    }else if(that.password==''){
+      Indicator.open('密码错误');
+      setTimeout(function(){
+                    Indicator.close()
+                    },1000)
+    }else{
+       let url='/api/remote/h5User/login?phone='+phone+'&pwd='+pwd+'&sign='+sign+'&timestamp='+timestamp
       this.$http.get(url).then(function(data){
-            if(data.status==200){
+        console.log(data)
+            if(data.status=='200'){
             console.log(data.body.message)
             Indicator.open(data.body.message);
             util.store.setItem('_user_',util.jsonToString(data.body.body));
@@ -63,6 +75,8 @@ export default {
                 },function(response){
                     console.info(response);
               })
+    }
+   
     }
   }
 }
