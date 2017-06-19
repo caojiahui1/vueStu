@@ -34,26 +34,26 @@ export default {
         },
   methods : {
  
-    addList : function (){
-      var that=this
+    addList  (){
+      let that=this
      
     },
-    changeRouter : function(){
-    var that=this;
-    var timestamp = util.timeStamp();
-    var sign  = hex_md5(that.username+'|'+hex_md5(that.password)+'|'+timestamp);
-    var pwd=hex_md5(that.password);
-    var phone=that.username;
-    var url='/api/remote/h5User/login?phone='+phone+'&pwd='+pwd+'&sign='+sign+'&timestamp='+timestamp
+    changeRouter (){
+    let that=this;
+    let timestamp = util.timeStamp();
+    let sign  = hex_md5(that.username+'|'+hex_md5(that.password)+'|'+timestamp);
+    let pwd=hex_md5(that.password);
+    let phone=that.username;
+    let url='/api/remote/h5User/login?phone='+phone+'&pwd='+pwd+'&sign='+sign+'&timestamp='+timestamp
       this.$http.get(url).then(function(data){
             if(data.status==200){
             console.log(data.body.message)
             Indicator.open(data.body.message);
             util.store.setItem('_user_',util.jsonToString(data.body.body));
-            that.username2=util.store.getItem('_user_')
+            that.username2=JSON.parse(util.store.getItem('_user_'))
             store.commit('isLoginchange',false)
             store.commit('myLoginchange',true)
-            store.commit('namechange',that.username2)
+            store.commit('namechange',that.username2.username)
             setTimeout(function(){
                     Indicator.close()
                     },1000)

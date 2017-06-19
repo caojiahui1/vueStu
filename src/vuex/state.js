@@ -1,7 +1,7 @@
 export default{
-	title:1,
-	mytitle:'不是首页',
+	title:'',
+	mytitle:'',
 	isLogin:true,
 	myLogin:false,
-	myName:'11'
+	myName:'登录/注册'
 }

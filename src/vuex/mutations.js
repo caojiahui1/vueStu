@@ -1,5 +1,5 @@
 export default{
-	increment (state) {
+	  increment (state) {
       state.title++
     },
     titlechange (state,change) {
